@@ -1,8 +1,9 @@
-#include <QtCore/QCoreApplication>
-
+#include <QApplication>
+#include <QLabel>
 int main(int argc, char *argv[])
 {
-	QCoreApplication a(argc, argv);
-
-	return a.exec();
+	QApplication app(argc, argv);
+	QLabel *label = new QLabel("Hello Qt!");
+	label->show();
+	return app.exec();
 }
