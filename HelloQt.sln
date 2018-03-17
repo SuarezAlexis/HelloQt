@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloQt", "HelloQt\HelloQt.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGLWindow", "OpenGLWindow\OpenGLWindow.vcxproj", "{ACA98CB6-98AF-4E49-B6FA-0D4F3C17A67B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cube", "Cube\Cube.vcxproj", "{6DBCFDD0-1127-4DB7-83E8-E8E67B1FE293}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +23,10 @@ Global
 		{ACA98CB6-98AF-4E49-B6FA-0D4F3C17A67B}.Debug|x86.Build.0 = Debug|Win32
 		{ACA98CB6-98AF-4E49-B6FA-0D4F3C17A67B}.Release|x86.ActiveCfg = Release|Win32
 		{ACA98CB6-98AF-4E49-B6FA-0D4F3C17A67B}.Release|x86.Build.0 = Release|Win32
+		{6DBCFDD0-1127-4DB7-83E8-E8E67B1FE293}.Debug|x86.ActiveCfg = Debug|Win32
+		{6DBCFDD0-1127-4DB7-83E8-E8E67B1FE293}.Debug|x86.Build.0 = Debug|Win32
+		{6DBCFDD0-1127-4DB7-83E8-E8E67B1FE293}.Release|x86.ActiveCfg = Release|Win32
+		{6DBCFDD0-1127-4DB7-83E8-E8E67B1FE293}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

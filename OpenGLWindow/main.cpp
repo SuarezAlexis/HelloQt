@@ -148,14 +148,22 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 
 	//Los tres vértices del triángulo.
 	GLfloat vertices[] = {
-		0.5f,0.5f,
-		-0.5f, 0.5f,
-		-0.5f, -0.5f,
-		0.5f, -0.5f
+		0.5f,0.5f,-0.5,
+		-0.5f, 0.5f,-0.5,
+		-0.5f, -0.5f,-0.5,
+		0.5f, -0.5f,-0.5,
+		0.5f,0.5f,0.5,
+		-0.5f, 0.5f,0.5,
+		-0.5f, -0.5f,0.5,
+		0.5f, -0.5f, 0.5,
 	};
 
 	//Los colores para cada vértice.
 	GLfloat colors[] = {
+		1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
@@ -167,14 +175,14 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	// si se deben o no normalizar los datos de punto fijo,
 	// el espacio en bytes entre el inicio de cada atributo de vértice consecutivo (0 significa que son contiguos),
 	// y el apuntador al arreglo de datos.
-	glVertexAttribPointer(m_posAttr, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glVertexAttribPointer(m_posAttr, 3, GL_FLOAT, GL_FALSE, 0, vertices);
 	glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors);
 
 	glEnableVertexAttribArray(0); //Habilita los arreglos de atributos de vértice 0 y 1
 	glEnableVertexAttribArray(1); //para el color y la posición.
 
-	glDrawArrays(GL_QUADS, 0, 4); //Dibuja los arreglos de atributos de vértice habilitados 
-									  //desde el indice 0, con 3 valores por elemento.
+	glDrawArrays(GL_QUADS, 0, 8); //Dibuja los arreglos de atributos de vértice habilitados 
+									  //desde el indice 0, una determinada cantidad de elementos (8 en este caso).
 
 	glDisableVertexAttribArray(1); //Deshabilita los arreglos de atrbutos de vértice.
 	glDisableVertexAttribArray(0);
