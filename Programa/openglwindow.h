@@ -81,6 +81,7 @@ protected:
 
 private:
 	bool m_animating;
+	int rotating;
 
 	QOpenGLContext *m_context;
 	QOpenGLPaintDevice *m_device;

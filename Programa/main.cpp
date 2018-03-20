@@ -54,7 +54,7 @@
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLShaderProgram>
 #include <QtGui/QScreen>
-
+#include <QKeyEvent>
 #include <QtCore/qmath.h>
 
 //Clase TriangleWindow es la ventana OpenGL
@@ -64,7 +64,8 @@ public:
 	TriangleWindow(); //Constructor de la clase
 
 	void initialize() override;	//Métodos para inicializar y renderizar ventana,
-	void render() override;		// heredados de superclase. Se implementan más abajo.
+	void render() override;		// heredados de supercalsse. Se implementan más abajo.
+	void keyPressEvent(QKeyEvent* ev) override;
 
 private:
 	GLuint m_posAttr;		// Variables que usarán los programas de shader
@@ -73,11 +74,13 @@ private:
 
 	QOpenGLShaderProgram *m_program; //Variable que apunta al programa shader
 	int m_frame; //Contador de frames para regular animación del triángulo
+	int rotating; //Bandera que define si el objeto rota o no
 };
 
 TriangleWindow::TriangleWindow()
 	: m_program(0)
 	, m_frame(0)
+	, rotating(1)
 {
 }
 
@@ -140,10 +143,10 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	QMatrix4x4 matrix;
 	matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f); //Matriz de perspectiva.
 	matrix.translate(0, 0, -2); // Se aplica traslación
-	matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
+	matrix.rotate( (rotating == 0? 1 : rotating) * 100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
 																		//en función de la tasa de refresco
 																		//de la pantalla.
-																		//Se asigna valor uniforme obtenido en el shader de vertices.
+	//Se asigna valor uniforme obtenido en el shader de vertices.
 	m_program->setUniformValue(m_matrixUniform, matrix);
 
 	//Los tres vértices del triángulo.
@@ -188,6 +191,32 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	glDisableVertexAttribArray(0);
 
 	m_program->release(); //Libera los programas de shader.
+	
+	if(rotating != 0)
+		++m_frame; //Se incrementa el contador que controla el giro del triángulo.
+}
 
-	++m_frame; //Se incrementa el contador que controla el giro del triángulo.
+void TriangleWindow::keyPressEvent(QKeyEvent* ev)
+{
+	switch (ev->key())
+	{
+	case Qt::Key_Left:
+		if (this->rotating == -1)
+			this->rotating = 0;
+		else
+			this->rotating = -1;
+		printf("Rotating %d\n", this->rotating);
+		return;
+	case Qt::Key_Right:
+		if (this->rotating == 1)
+			this->rotating = 0;
+		else
+			this->rotating = 1;
+		printf("Rotating %d\n", this->rotating);
+		return;
+	case Qt::Key_Up:
+		return;
+	case Qt::Key_Down:
+		return;
+	}
 }
