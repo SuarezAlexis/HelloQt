@@ -75,7 +75,7 @@ private:
 	int m_frame; //Contador de frames para regular animación del triángulo
 };
 
-TriangleWindow::TriangleWindow() 
+TriangleWindow::TriangleWindow()
 	: m_program(0)
 	, m_frame(0)
 {
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 	format.setSamples(16); // de 4 muestras
 
 	TriangleWindow window; //Instancia de la ventana OpenGL
-	window.setFormat(format); 
+	window.setFormat(format);
 	window.resize(640, 480);
 	window.show();
 
@@ -143,8 +143,8 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	matrix.rotate(100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
 																		//en función de la tasa de refresco
 																		//de la pantalla.
-	//Se asigna valor uniforme obtenido en el shader de vertices.
-	m_program->setUniformValue(m_matrixUniform, matrix); 
+																		//Se asigna valor uniforme obtenido en el shader de vertices.
+	m_program->setUniformValue(m_matrixUniform, matrix);
 
 	//Los tres vértices del triángulo.
 	GLfloat vertices[] = {
@@ -182,7 +182,7 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	glEnableVertexAttribArray(1); //para el color y la posición.
 
 	glDrawArrays(GL_QUADS, 0, 8); //Dibuja los arreglos de atributos de vértice habilitados 
-									  //desde el indice 0, una determinada cantidad de elementos (8 en este caso).
+								  //desde el indice 0, una determinada cantidad de elementos (8 en este caso).
 
 	glDisableVertexAttribArray(1); //Deshabilita los arreglos de atrbutos de vértice.
 	glDisableVertexAttribArray(0);
