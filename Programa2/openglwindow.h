@@ -3,7 +3,7 @@
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
-** This file is part of the QtCore module of the Qt Toolkit.
+** This file is part of the documentation of the Qt Toolkit.
 **
 ** $QT_BEGIN_LICENSE:BSD$
 ** Commercial License Usage
@@ -49,30 +49,39 @@
 ****************************************************************************/
 
 
-#include <QApplication>
-#include <QLabel>
-#include <QSurfaceFormat>
+#include <QtGui/QWindow>
+#include <QtGui/QOpenGLFunctions>
 
-#ifndef QT_NO_OPENGL
-#include "mainwidget.h"
-#endif
+class QPainter;
+class QOpenGLContext;
+class QOpenGLPaintDevice;
 
-int main(int argc, char *argv[])
+class OpenGLWindow : public QWindow, protected QOpenGLFunctions
 {
-	QApplication app(argc, argv);
+	Q_OBJECT
+public:
+	explicit OpenGLWindow(QWindow *parent = 0);
+	~OpenGLWindow();
 
-	QSurfaceFormat format;
-	format.setDepthBufferSize(24);
-	QSurfaceFormat::setDefaultFormat(format);
+	virtual void render(QPainter *painter);
+	virtual void render();
 
-	app.setApplicationName("Cube");
-	app.setApplicationVersion("0.1");
-#ifndef QT_NO_OPENGL
-	MainWidget widget;
-	widget.show();
-#else
-	QLabel note("OpenGL Support required");
-	note.show();
-#endif
-	return app.exec();
-}
+	virtual void initialize();
+
+	void setAnimating(bool animating);
+
+	public slots:
+	void renderLater();
+	void renderNow();
+
+protected:
+	bool event(QEvent *event) override;
+
+	void exposeEvent(QExposeEvent *event) override;
+
+private:
+	bool m_animating;
+
+	QOpenGLContext *m_context;
+	QOpenGLPaintDevice *m_device;
+};
