@@ -75,12 +75,18 @@ private:
 	QOpenGLShaderProgram *m_program; //Variable que apunta al programa shader
 	int m_frame; //Contador de frames para regular animación del triángulo
 	int rotating; //Bandera que define si el objeto rota o no
+	float red, green, blue;
+	float camara;
 };
 
 TriangleWindow::TriangleWindow()
 	: m_program(0)
 	, m_frame(0)
 	, rotating(0)
+	, red(1)
+	, green(0)
+	, blue(0)
+	, camara(0)
 {
 }
 
@@ -142,7 +148,7 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 
 	QMatrix4x4 matrix;
 	matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f); //Matriz de perspectiva.
-	matrix.translate(0, 0, -2); // Se aplica traslación
+	matrix.translate(0, 0, -2 + camara); // Se aplica traslación
 	matrix.rotate( 100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
 																		//en función de la tasa de refresco
 																		//de la pantalla.
@@ -154,23 +160,39 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 		0.5f,0.5f,-0.5,
 		-0.5f, 0.5f,-0.5,
 		-0.5f, -0.5f,-0.5,
-		0.5f, -0.5f,-0.5,
-		0.5f,0.5f,0.5,
-		-0.5f, 0.5f,0.5,
-		-0.5f, -0.5f,0.5,
+		0.5f, -0.5f, -0.5,
+		0.5f,0.5f, 0.5,
+		-0.5f, 0.5f, 0.5,
+		-0.5f, -0.5f, 0.5,
 		0.5f, -0.5f, 0.5,
+		0.5f,-0.5f, -0.5,
+		0.5f, -0.5f, 0.5,
+		-0.5f, -0.5f, 0.5,
+		-0.5f, -0.5f, -0.5,
+		0.5f,0.5f, -0.5,
+		0.5f, 0.5f, 0.5,
+		-0.5f, 0.5f, 0.5,
+		-0.5f, 0.5f, -0.5
 	};
 
 	//Los colores para cada vértice.
 	GLfloat colors[] = {
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue,
+		red, green, blue
 	};
 
 	// Especifica qué atributo del vértice se modificará (en este caso la posición y abajo el color),
@@ -184,7 +206,7 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	glEnableVertexAttribArray(0); //Habilita los arreglos de atributos de vértice 0 y 1
 	glEnableVertexAttribArray(1); //para el color y la posición.
 
-	glDrawArrays(GL_QUADS, 0, 8); //Dibuja los arreglos de atributos de vértice habilitados 
+	glDrawArrays(GL_QUADS, 0, 16); //Dibuja los arreglos de atributos de vértice habilitados 
 								  //desde el indice 0, una determinada cantidad de elementos (8 en este caso).
 
 	glDisableVertexAttribArray(1); //Deshabilita los arreglos de atrbutos de vértice.
@@ -205,9 +227,32 @@ void TriangleWindow::keyPressEvent(QKeyEvent* ev)
 	case Qt::Key_Right:
 		rotating++;
 		return;
-	case Qt::Key_Up:
+	case Qt::Key_F3:
+		camara += 0.5f;
 		return;
-	case Qt::Key_Down:
+	case Qt::Key_F2:
+		camara -= 0.5f;
+		return;
+	case Qt::Key_R:
+		if (ev->modifiers() && Qt::ShiftModifier && red >= 0)
+			red -= 0.1;
+		else
+			if (red <= 1)
+				red += 0.1;
+		return;
+	case Qt::Key_G:
+		if (ev->modifiers() && Qt::ShiftModifier && green >= 0)
+			green -= 0.1;
+		else
+			if (green <= 1)
+				green += 0.1;
+		return;
+	case Qt::Key_B:
+		if (ev->modifiers() && Qt::ShiftModifier && blue >= 0)
+			blue -= 0.1;
+		else
+			if (blue <= 1)
+				blue += 0.1;
 		return;
 	}
 }
