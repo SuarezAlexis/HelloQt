@@ -80,7 +80,7 @@ private:
 TriangleWindow::TriangleWindow()
 	: m_program(0)
 	, m_frame(0)
-	, rotating(1)
+	, rotating(0)
 {
 }
 
@@ -143,7 +143,7 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 	QMatrix4x4 matrix;
 	matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f); //Matriz de perspectiva.
 	matrix.translate(0, 0, -2); // Se aplica traslación
-	matrix.rotate( (rotating == 0? 1 : rotating) * 100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
+	matrix.rotate( 100.0f * m_frame / screen()->refreshRate(), 0, 1, 0); //Se aplica rotación variable (eje y)
 																		//en función de la tasa de refresco
 																		//de la pantalla.
 	//Se asigna valor uniforme obtenido en el shader de vertices.
@@ -192,8 +192,7 @@ void TriangleWindow::render() //Implementación del método heredado de OpenGLWind
 
 	m_program->release(); //Libera los programas de shader.
 	
-	if(rotating != 0)
-		++m_frame; //Se incrementa el contador que controla el giro del triángulo.
+	m_frame += rotating; //Se incrementa el contador que controla el giro del triángulo.
 }
 
 void TriangleWindow::keyPressEvent(QKeyEvent* ev)
@@ -201,18 +200,10 @@ void TriangleWindow::keyPressEvent(QKeyEvent* ev)
 	switch (ev->key())
 	{
 	case Qt::Key_Left:
-		if (this->rotating == -1)
-			this->rotating = 0;
-		else
-			this->rotating = -1;
-		printf("Rotating %d\n", this->rotating);
+		rotating--;
 		return;
 	case Qt::Key_Right:
-		if (this->rotating == 1)
-			this->rotating = 0;
-		else
-			this->rotating = 1;
-		printf("Rotating %d\n", this->rotating);
+		rotating++;
 		return;
 	case Qt::Key_Up:
 		return;
