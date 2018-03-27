@@ -1,4 +1,5 @@
 #include <QtWidgets>
+#include <QMessageBox>
 
 #include "mainwindow.h"
 #include "window.h"
@@ -15,7 +16,7 @@ MainWindow::MainWindow()
 
 	setWindowTitle(tr("Practica 1  [DIMyRV]"));
 	setMinimumSize(160, 160);
-	resize(480, 320);
+	resize(800, 600);
 }
 
 /*
@@ -62,7 +63,8 @@ void MainWindow::Azul()
 }
 void MainWindow::Cerrar()
 {
-
+	QMessageBox::information(0, tr("Mensaje"), tr("Este programa dice:\n\"return EXIT_SUCCESS;\""));
+	QApplication::quit();
 }
 
 /*

@@ -75,6 +75,9 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
 public:
 	explicit MainWidget(QWidget *parent = 0);
 	~MainWidget();
+	/*void drawCube();
+	void drawSphere();
+	void*/ 
 
 protected:
 	void mousePressEvent(QMouseEvent *e) override;
