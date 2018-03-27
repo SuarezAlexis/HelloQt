@@ -1,4 +1,4 @@
-/****************************************************************************
+	/****************************************************************************
 **
 ** Copyright (C) 2016 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
@@ -50,11 +50,13 @@
 
 
 #include <QApplication>
+#include <QDesktopWidget>
 #include <QLabel>
 #include <QSurfaceFormat>
 
 #ifndef QT_NO_OPENGL
 #include "mainwidget.h"
+#include "mainwindow.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -65,11 +67,21 @@ int main(int argc, char *argv[])
 	format.setDepthBufferSize(24);
 	QSurfaceFormat::setDefaultFormat(format);
 
-	app.setApplicationName("Cube");
+	app.setApplicationName("Practica 1 [DIMyRV]");
 	app.setApplicationVersion("0.1");
+
 #ifndef QT_NO_OPENGL
-	MainWidget widget;
-	widget.show();
+	MainWindow window;
+	
+	window.resize(window.sizeHint());
+	int desktopArea = QApplication::desktop()->width() * QApplication::desktop()->height();
+	int widgetArea = window.width() * window.height();
+	if (((float)widgetArea / (float)desktopArea) < 0.75f)
+		window.show();
+	else
+		window.showMaximized();
+	/*MainWidget widget;
+	widget.show();*/
 #else
 	QLabel note("OpenGL Support required");
 	note.show();

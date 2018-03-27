@@ -109,12 +109,16 @@
     <ClCompile Include="geometryengine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwidget.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="mainwidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometryengine.h" />
+    <QtMoc Include="window.h" />
+    <QtMoc Include="mainwindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fshader.glsl" />

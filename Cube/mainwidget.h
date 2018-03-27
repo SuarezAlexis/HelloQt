@@ -63,6 +63,9 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 
+#include <QMenu>
+#include <QAction>	
+
 class GeometryEngine;
 
 class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
@@ -85,7 +88,6 @@ protected:
 	void initShaders();
 	void initTextures();
 
-private:
 	QBasicTimer timer;
 	QOpenGLShaderProgram program;
 	GeometryEngine *geometries;
