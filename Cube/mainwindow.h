@@ -23,9 +23,9 @@ public:
 	QAction *cerrarAction;
 
 signals:
-	void cuboRequest();
-	void esferaRequest();
-	void cilindroRequest();
+	void cuboRequest(float size, float *pos);
+	void esferaRequest(float radius, float *pos);
+	void cilindroRequest(float height, float radius, float *pos);
 	void rojoRequest();
 	void verdeRequest();
 	void azulRequest();

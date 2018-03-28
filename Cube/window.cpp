@@ -15,9 +15,9 @@ Window::Window(MainWindow *mw)
 {
 	glWidget = new MainWidget;
 	
-	connect(mw, SIGNAL(cuboRequest()), glWidget, SLOT(cuboResponse()));
-	connect(mw, SIGNAL(esferaRequest()), glWidget, SLOT(esferaResponse()));
-	connect(mw, SIGNAL(cilindroRequest()), glWidget, SLOT(cilindroResponse()));
+	connect(mw, SIGNAL(cuboRequest(float, float*)), glWidget, SLOT(cuboResponse(float, float*)));
+	connect(mw, SIGNAL(esferaRequest(float, float*)), glWidget, SLOT(esferaResponse(float, float*)));
+	connect(mw, SIGNAL(cilindroRequest(float, float, float*)), glWidget, SLOT(cilindroResponse(float, float, float*)));
 	connect(mw, SIGNAL(rojoRequest()), glWidget, SLOT(rojoResponse()));
 	connect(mw, SIGNAL(verdeRequest()), glWidget, SLOT(verdeResponse()));
 	connect(mw, SIGNAL(azulRequest()), glWidget, SLOT(azulResponse()));

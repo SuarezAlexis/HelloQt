@@ -221,22 +221,31 @@ void MainWidget::paintGL()
 	update();
 }
 
-void MainWidget::cuboResponse()
+void MainWidget::cuboResponse(float size, float *pos)
 {
 	cubosCount++;
-	printf("Cubos: %d\n", cubosCount);
+	printf("Cubos: %d \tsize %.2f\t", cubosCount, size);
+	printf("pos %.2f %.2f %.2f\n", pos[0], pos[1], pos[2]);
+	struct Cubo cubo = { size, pos };
+	cubos << &cubo;
 }
 
-void MainWidget::esferaResponse()
+void MainWidget::esferaResponse(float radius, float *pos)
 {
 	esferasCount++;
-	printf("Esferas: %d\n", esferasCount);
+	printf("Esferas: %d \tradius %.2f\t", esferasCount, radius);
+	printf("pos %.2f %.2f %.2f\n", pos[0], pos[1], pos[2]);
+	struct Esfera esfera = { radius, pos };
+	esferas << &esfera;
 }
 
-void MainWidget::cilindroResponse()
+void MainWidget::cilindroResponse(float height, float radius, float *pos)
 {
 	cilindrosCount++;
-	printf("Cilindros: %d\n", cilindrosCount);
+	printf("Cilindros: %d \theight %.2f\tradius %.2f", cilindrosCount, height, radius);
+	printf("pos %.2f %.2f %.2f\n", pos[0], pos[1], pos[2]);
+	struct Cilindro cilindro = { height, radius, pos };
+	cilindros << &cilindro;
 }
 
 void MainWidget::rojoResponse()
@@ -254,7 +263,7 @@ void MainWidget::azulResponse()
 	QApplication::quit();
 }
 
-void MainWidget::drawCube(float size, float pos[], float rot[])
+void MainWidget::drawCube(float size, float pos[])
 {
 
 }
@@ -264,7 +273,7 @@ void MainWidget::drawSphere(float radius, float pos[])
 
 }
 
-void MainWidget::drawCylinder(float height, float radius, float pos[], float rot[])
+void MainWidget::drawCylinder(float height, float radius, float pos[])
 {
 
 }

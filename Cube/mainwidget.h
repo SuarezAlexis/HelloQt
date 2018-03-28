@@ -71,22 +71,20 @@ class GeometryEngine;
 struct Cubo
 {
 	float size;
-	float pos[3];
-	float rot[3];
+	float *pos;
 };
 
 struct Esfera
 {
 	float radius;
-	float pos[3];
+	float *pos;
 };
 
 struct Cilindro
 {
 	float height;
 	float radius;
-	float pos[3];
-	float rot[3];
+	float *pos;
 };
 
 class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
@@ -96,24 +94,24 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
 public:
 	explicit MainWidget(QWidget *parent = 0);
 	~MainWidget();
-	void drawCube(float size, float pos[], float rot[]);
+	void drawCube(float size, float pos[]);
 	void drawSphere(float radius, float pos[]);
-	void drawCylinder(float height, float radius, float pos[], float rot[]);
+	void drawCylinder(float height, float radius, float pos[]);
 
 public slots:
-	void cuboResponse();
-	void esferaResponse();
-	void cilindroResponse();
+	void cuboResponse(float size, float *pos);
+	void esferaResponse(float radius, float *pos);
+	void cilindroResponse(float height, float radius, float *pos);
 	void rojoResponse();
 	void verdeResponse();
 	void azulResponse();
 
 protected:
-	struct Cubo *cubos;
+	QList<struct Cubo *> cubos;
 	int cubosCount = 0;
-	struct Esfera *esferas;
+	QList<struct Esfera *> esferas;
 	int esferasCount = 0;
-	struct Cilindro *cilindros;
+	QList<struct Cilindro *> cilindros;
 	int cilindrosCount = 0;
 
 	void mousePressEvent(QMouseEvent *e) override;
