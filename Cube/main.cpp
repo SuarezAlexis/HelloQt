@@ -73,15 +73,12 @@ int main(int argc, char *argv[])
 #ifndef QT_NO_OPENGL
 	MainWindow window;
 	
-//	window.resize(window.sizeHint());
 	int desktopArea = QApplication::desktop()->width() * QApplication::desktop()->height();
 	int widgetArea = window.width() * window.height();
-	if (((float)widgetArea / (float)desktopArea) < 0.75f)
+	if ( ( (float)widgetArea / (float)desktopArea) < 0.75f )
 		window.show();
 	else
 		window.showMaximized();
-	/*MainWidget widget;
-	widget.show();*/
 #else
 	QLabel note("OpenGL Support required");
 	note.show();

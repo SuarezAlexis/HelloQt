@@ -14,12 +14,21 @@ class MainWindow : public QMainWindow
 
 public:
 	MainWindow();
-/*
-protected:
-#ifndef QT_NO_CONTEXTMENU
-	void contextMenuEvent(QContextMenuEvent *event) override;
-#endif // QT_NO_CONTEXTMENU
-*/
+	QAction *cuboAction;
+	QAction *esferaAction;
+	QAction *cilindroAction;
+	QAction *rojoAction;
+	QAction *verdeAction;
+	QAction *azulAction;
+	QAction *cerrarAction;
+
+signals:
+	void cuboRequest();
+	void esferaRequest();
+	void cilindroRequest();
+	void rojoRequest();
+	void verdeRequest();
+	void azulRequest();
 
 private slots:
 	void Cubo();
@@ -38,13 +47,7 @@ private:
 	QMenu *colorMenu;
 	QMenu *dimrvMenu;
 
-	QAction *cuboAction;
-	QAction *esferaAction;
-	QAction *cilindroAction;
-	QAction *rojoAction;
-	QAction *verdeAction;
-	QAction *azulAction;
-	QAction *cerrarAction;
+
 };
 
 #endif

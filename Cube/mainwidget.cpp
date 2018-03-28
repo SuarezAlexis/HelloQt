@@ -48,13 +48,13 @@
 **
 ****************************************************************************/
 
-
+#include <QApplication>
 #include "mainwidget.h"
 
 #include <QMouseEvent>
 #include <math.h>
 
-MainWidget::MainWidget(QWidget *parent) :
+MainWidget::MainWidget(	QWidget *parent) :
 	QOpenGLWidget(parent),
 	geometries(0),
 	texture(0),
@@ -188,6 +188,7 @@ void MainWidget::resizeGL(int w, int h)
 
 void MainWidget::paintGL()
 {
+	int i = 0;
 	// Clear color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -204,6 +205,66 @@ void MainWidget::paintGL()
 	// Use texture unit 0 which contains cube.png
 	program.setUniformValue("texture", 0);
 
-	// Draw cube geometry
-	geometries->drawCubeGeometry(&program);
+	// Draw geometries
+	for (i = 0; i < cubosCount; i++)
+	{
+		geometries->drawCubeGeometry(&program);
+	}
+	for (i = 0; i < esferasCount; i++)
+	{
+		geometries->drawSphereGeometry(&program);
+	}
+	for (i = 0; i < cilindrosCount; i++)
+	{
+		geometries->drawCylinderGeometry(&program);
+	}
+	update();
+}
+
+void MainWidget::cuboResponse()
+{
+	cubosCount++;
+	printf("Cubos: %d\n", cubosCount);
+}
+
+void MainWidget::esferaResponse()
+{
+	esferasCount++;
+	printf("Esferas: %d\n", esferasCount);
+}
+
+void MainWidget::cilindroResponse()
+{
+	cilindrosCount++;
+	printf("Cilindros: %d\n", cilindrosCount);
+}
+
+void MainWidget::rojoResponse()
+{
+	QApplication::quit();
+}
+
+void MainWidget::verdeResponse()
+{
+	QApplication::quit();
+}
+
+void MainWidget::azulResponse()
+{
+	QApplication::quit();
+}
+
+void MainWidget::drawCube(float size, float pos[], float rot[])
+{
+
+}
+
+void MainWidget::drawSphere(float radius, float pos[])
+{
+
+}
+
+void MainWidget::drawCylinder(float height, float radius, float pos[], float rot[])
+{
+
 }

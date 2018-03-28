@@ -19,68 +19,16 @@ MainWindow::MainWindow()
 	resize(800, 600);
 }
 
-/*
-#ifndef QT_NO_CONTEXTMENU
-void MainWindow::contextMenuEvent(QContextMenuEvent *event)
-{
-	QMenu menu(this);
-	menu.addAction(cutAct);
-	menu.addAction(copyAct);
-	menu.addAction(pasteAct);
-	menu.exec(event->globalPos());
-}
-#endif // QT_NO_CONTEXTMENU
-*/
-
-void MainWindow::Cubo()
-{
-
-}
-
-void MainWindow::Esfera()
-{
-
-}
-
-void MainWindow::Cilindro()
-{
-
-}
-
-void MainWindow::Rojo()
-{
-
-}
-
-void MainWindow::Verde()
-{
-
-}
-
-void MainWindow::Azul()
-{
-
-}
 void MainWindow::Cerrar()
 {
 	QMessageBox::information(0, tr("Mensaje"), tr("Este programa dice:\n\"return EXIT_SUCCESS;\""));
 	QApplication::quit();
 }
 
-/*
-void MainWindow::about()
-{
-	infoLabel->setText(tr("Invoked <b>Help|About</b>"));
-	QMessageBox::about(this, tr("About Menu"),
-		tr("The <b>Menu</b> example shows how to create "
-			"menu-bar menus and context menus."));
-}
-*/
-
 void MainWindow::createActions()
 {
 	cuboAction = new QAction(tr("&Cubo"), this);
-	cuboAction->setShortcut(QKeySequence::New);
+	cuboAction->setShortcut(QKeySequence::Cut);
 	cuboAction->setStatusTip(tr("Crear un nuevo cubo"));
 	connect(cuboAction, &QAction::triggered, this, &MainWindow::Cubo);
 
@@ -129,4 +77,35 @@ void MainWindow::createMenus()
 	colorMenu->addAction(rojoAction);
 	colorMenu->addAction(verdeAction);
 	colorMenu->addAction(azulAction);	
+}
+
+
+void MainWindow::Cubo()
+{
+	emit cuboRequest();
+}
+
+void MainWindow::Esfera()
+{
+	emit esferaRequest();
+}
+
+void MainWindow::Cilindro()
+{
+	emit cilindroRequest();
+}
+
+void MainWindow::Rojo()
+{
+	emit rojoRequest();
+}
+
+void MainWindow::Verde()
+{
+	emit verdeRequest();
+}
+
+void MainWindow::Azul()
+{
+	emit azulRequest();
 }

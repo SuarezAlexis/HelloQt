@@ -147,6 +147,16 @@ void GeometryEngine::initCubeGeometry()
 	indexBuf.allocate(indices, 34 * sizeof(GLushort));
 }
 
+void GeometryEngine::initSphereGeometry()
+{
+
+}
+
+void GeometryEngine::initCylinderGeometry()
+{
+
+}
+
 void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
 {
 	// Tell OpenGL which VBOs to use
@@ -171,4 +181,14 @@ void GeometryEngine::drawCubeGeometry(QOpenGLShaderProgram *program)
 
 	// Draw cube geometry using indices from VBO 1
 	glDrawElements(GL_TRIANGLE_STRIP, 34, GL_UNSIGNED_SHORT, 0);
+}
+
+void GeometryEngine::drawSphereGeometry(QOpenGLShaderProgram *program)
+{
+
+}
+
+void GeometryEngine::drawCylinderGeometry(QOpenGLShaderProgram *program)
+{
+	
 }

@@ -14,14 +14,14 @@ Window::Window(MainWindow *mw)
 	: mainWindow(mw)
 {
 	glWidget = new MainWidget;
-	/*
-	connect(xSlider , &QSlider::valueChanged, glWidget, &GLWidget::setXRotation);
-	connect(glWidget, &GLWidget::xRotationChanged, xSlider, &QSlider::setValue);
-	connect(ySlider, &QSlider::valueChanged, glWidget, &GLWidget::setYRotation);
-	connect(glWidget, &GLWidget::yRotationChanged, ySlider, &QSlider::setValue);
-	connect(zSlider, &QSlider::valueChanged, glWidget, &GLWidget::setZRotation);
-	connect(glWidget, &GLWidget::zRotationChanged, zSlider, &QSlider::setValue);
-	*/
+	
+	connect(mw, SIGNAL(cuboRequest()), glWidget, SLOT(cuboResponse()));
+	connect(mw, SIGNAL(esferaRequest()), glWidget, SLOT(esferaResponse()));
+	connect(mw, SIGNAL(cilindroRequest()), glWidget, SLOT(cilindroResponse()));
+	connect(mw, SIGNAL(rojoRequest()), glWidget, SLOT(rojoResponse()));
+	connect(mw, SIGNAL(verdeRequest()), glWidget, SLOT(verdeResponse()));
+	connect(mw, SIGNAL(azulRequest()), glWidget, SLOT(azulResponse()));
+
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 	QHBoxLayout *container = new QHBoxLayout;
 	container->addWidget(glWidget);
